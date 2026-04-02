@@ -12,8 +12,13 @@ public class FizzBuzzTest
     @Test
     void return_n_pour_n() {
         assertEquals("1", fb.fizzBuzz(1));
-        assertEquals("2", fb.fizzBuzz(2));
-        assertEquals("4", fb.fizzBuzz(4));
+        assertEquals("7", fb.fizzBuzz(7));
+    }
+
+    @Test
+    void return_bouh() {
+        assertEquals("bouh", fb.fizzBuzz(2));
+        assertEquals("bouh", fb.fizzBuzz(4));
     }
 
     @Test
@@ -26,8 +31,7 @@ public class FizzBuzzTest
     @Test
     void return_buzz() {
         assertEquals("buzz", fb.fizzBuzz(5));
-        assertEquals("buzz", fb.fizzBuzz(10));
-        assertEquals("buzz", fb.fizzBuzz(20));
+        assertEquals("buzz", fb.fizzBuzz(25));
     }
 
     @Test
