@@ -85,7 +85,7 @@ Cette branche ajoute une nouvelle règle : si le nombre est multiple de **2**, r
 
 ### 🟢 `updateToRoman` — CI au vert
 
-Cette branche étend le convertisseur romain pour supporter les nombres jusqu'à **8999**.
+Cette branche je rajoute un test unitaire. 
 
 Tous les tests sont mis à jour et passent. La CI valide la PR avec succès.
 
