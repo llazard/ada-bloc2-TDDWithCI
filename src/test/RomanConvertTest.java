@@ -42,5 +42,6 @@ public class RomanConvertTest
         assertEquals("XCIX", converter.toRoman(99));
         assertEquals("MCMXCIV", converter.toRoman(1994));
         assertEquals("MMXXVI", converter.toRoman(2026));
+        assertEquals("MMMCMXCIX", converter.toRoman(3999));
     }
 }
