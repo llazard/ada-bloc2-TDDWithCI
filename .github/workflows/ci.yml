@@ -1,0 +1,50 @@
+# Nom du workflow, affiché dans l'onglet "Actions" sur GitHub
+name: CI
+
+# Définit les événements qui déclenchent ce workflow
+on:
+  # Se lance à chaque push, sur toutes les branches
+  push:
+    branches: [ "**" ]
+  # Se lance aussi à chaque fois qu'une Pull Request est ouverte ou mise à jour
+  pull_request:
+    branches: [ "**" ]
+
+# Un workflow est composé d'un ou plusieurs "jobs" qui s'exécutent en parallèle
+jobs:
+  # Nom du job (arbitraire, ici on l'appelle "test")
+  test:
+    # Définit la machine sur laquelle le job va tourner (ici une VM Linux Ubuntu)
+    runs-on: ubuntu-latest
+
+    # Liste des étapes qui s'exécutent les unes après les autres
+    steps:
+      # Étape 1 : récupère le code du repo sur la machine virtuelle
+      - name: 📥 Checkout du code
+        # "uses" permet d'utiliser une action GitHub prête à l'emploi
+        uses: actions/checkout@v4
+
+      # Étape 2 : installe Java sur la machine virtuelle
+      - name: ☕ Installation de Java 25
+        # action officielle pour installer Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+
+      # Étape 3 : télécharge le jar JUnit 5 depuis internet
+      # Evite d'avoir à committer une librairie dans le repo
+      - name: 📦 Téléchargement de JUnit
+        # "run" permet d'exécuter des commandes shell directement
+        run: curl -L -o junit.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
+
+      # Étape 4 : compile les fichiers Java
+      - name: 🔨 Compilation
+        run: |
+          mkdir -p out
+          javac -cp junit.jar -d out src/main/*.java src/test/*.java
+
+      # Étape 5 : exécute les tests avec le runner JUnit 5
+      # Si un test échoue, cette étape échoue et la CI passe au rouge ❌
+      - name: 🧪 Exécution des tests
+        run: java -jar junit.jar --class-path out --scan-class-path
