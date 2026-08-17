@@ -6,7 +6,6 @@ public class FizzBuzz {
         if (n % 15 == 0){
             return "fizzbuzz";
         }
-
         if (n % 2 == 0){
             return "bouh";
         }
