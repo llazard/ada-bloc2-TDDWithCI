@@ -7,7 +7,7 @@ public class FizzBuzz {
             return "fizzbuzz";
         }
         if (n % 2 == 0){
-            return "bouh";
+            return "bouh"
         }
         if (n % 3 == 0){
             return "fizz";
